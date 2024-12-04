@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import readFile from '../src/utils.js';
-import parse from '../src/parser.js';
+import genDiff from '../src/index.js';
+
 
 const program = new Command();
 
@@ -14,10 +14,9 @@ program
   .argument('<filepath1>')
   .argument('<filepath2>')
   .action((filepath1, filepath2) => {
-    const result1 = readFile(filepath1);
-    const result2 = readFile(filepath2);
-    console.log(parse(result1));
-    console.log(parse(result2));
+    const result = genDiff(filepath1, filepath2);
+    console.log(result);
+    
   });
 
 program.parse();
