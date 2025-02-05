@@ -7,7 +7,7 @@ function getString(value) {
     default:
       return value;
   }
-};
+}
 const data = {
   added: 'was added with value:',
   deleted: 'was removed',
@@ -34,5 +34,5 @@ function getPlain(tree) {
     return result.filter((item) => item != null).join('\n');
   }
   return iter(tree, '');
-};
+}
 export default getPlain;

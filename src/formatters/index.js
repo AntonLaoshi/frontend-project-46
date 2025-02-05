@@ -12,4 +12,4 @@ export default function makeFormat(tree, formatName = 'stylish') {
     default:
       throw new Error('Output format is not correct');
   }
-};
+}
