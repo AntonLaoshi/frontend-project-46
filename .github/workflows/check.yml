@@ -16,10 +16,14 @@ jobs:
           ./cc-reporter after-build --exit-code $?
   
   test:
+    test:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+ 
+    - name: Checkout code
+      uses: actions/checkout@v2
+
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
@@ -30,6 +34,7 @@ jobs:
 
     - name: Run tests and generate coverage
       run: npm test -- --coverage
+
 
     - name: Install Code Climate Reporter
       run: npm install -g codeclimate-test-reporter
