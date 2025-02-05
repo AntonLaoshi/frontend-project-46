@@ -15,7 +15,7 @@ function getSpace(depth, symbol) {
     return '';
   }
   return `${space.repeat(depth)}  ${symbol}`;
-}
+};
 
 function stringify(value, level) {
   function iter(currentValue, depth) {
@@ -26,7 +26,7 @@ function stringify(value, level) {
     return ['{', ...lines, `${getSpace(depth + 1)}}`].join('\n');
   }
   return iter(value, level);
-}
+};
 
 export default function getStylish(tree) {
   const iter = (object, depth) => {
@@ -47,4 +47,4 @@ export default function getStylish(tree) {
     return ['{', ...result, `${getSpace(depth)}}`].join('\n');
   };
   return iter(tree, 0);
-}
+};

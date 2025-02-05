@@ -6,12 +6,12 @@ function readFile(filePath) {
   const dirName = process.cwd(filePath);
   const fullPath = path.resolve(dirName, filePath);
   return fs.readFileSync(fullPath, 'utf-8');
-}
+};
 
 function getExtension(filename) {
   const result = filename.split('.');
   return result.at(-1);
-}
+};
 
 function getDifferentObject(obj1, obj2) {
   const allKeys = _.sortBy(_.union(_.keys(obj1), _.keys(obj2))).map((key) => {
@@ -53,6 +53,6 @@ function getDifferentObject(obj1, obj2) {
     };
   });
   return allKeys;
-}
+};
 
 export { readFile, getDifferentObject, getExtension };
