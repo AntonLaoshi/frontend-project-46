@@ -10,13 +10,31 @@ jobs:
       - run: make lint
       - run: make test
       - run: npm test -- --coverage --coverageProvider=v8
-      - name: Test & publish code coverage
-        # Publish code coverage on Code Climate
-        # https://github.com/paambaati/codeclimate-action
-        uses: paambaati/codeclimate-action@v5.0.0
-        # Add Code Climate secret key
-        env:
-          CODECLIMATE_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE_TEST_REPORTER_ID }}
-        with:
-          coverageCommand: make test-coverage
-          debug: true
+      - name: Setup Code Climate Reporter
+      - run: |
+          export CC_TEST_REPORTER_ID=${{ secrets.CC_TEST_REPORTER_ID }}
+          ./cc-reporter after-build --exit-code $?
+  
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests and generate coverage
+      run: npm test -- --coverage
+
+    - name: Install Code Climate Reporter
+      run: npm install -g codeclimate-test-reporter
+
+    - name: Upload coverage to Code Climate
+      run: codeclimate-test-reporter after-build --exit-code $?
+      env:
+        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
